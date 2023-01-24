@@ -446,7 +446,7 @@ penguins %>%
 :::
 
 
-## Data Visualization: 
+## Data Visualization:
 
 -   What is the distribution of penguins flipper lengths? numerical
 
@@ -542,3 +542,60 @@ Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
 ![](PalmerPenguinsAnalysis_files/figure-html/unnamed-chunk-12-1.png){width=672}
 :::
 :::
+
+
+Whether the average length for a penguin exceeds 45mm?
+
+
+::: {.cell}
+
+```{.r .cell-code}
+penguins %>%
+  summarize (avg_bill_length = mean(bill_length_mm))
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+# A tibble: 1 × 1
+  avg_bill_length
+            <dbl>
+1            46.4
+```
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+  t.test (penguins$bill_length_mm, alternative = "greater", mu = 45, corf.level = 0.95)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+
+	One Sample t-test
+
+data:  penguins$bill_length_mm
+t = 1.8438, df = 43, p-value = 0.03606
+alternative hypothesis: true mean is greater than 45
+95 percent confidence interval:
+ 45.12094      Inf
+sample estimates:
+mean of x 
+ 46.37045 
+```
+:::
+:::
+
+
+Notes:
+
+## Revisiting Intro Stats
+
+We assumed the Central Limit Theorem. The sampling distribution tends toward a normal distribution as sample sizes get larger.
+
+## Simulation-based Methods
+
+-   Assumption: our data is randomly sampled and is representative of our population.
+
+-   Bootstrapping; Treating our sample as if it were the population.

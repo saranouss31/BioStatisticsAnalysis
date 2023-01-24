@@ -147,7 +147,7 @@ penguins %>%
   summarize(mean_body_mass = mean(body_mass_g))
 ```
 
-## Data Visualization: 
+## Data Visualization:
 
 -   What is the distribution of penguins flipper lengths? numerical
 
@@ -195,3 +195,26 @@ penguins %>%
   geom_point(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_smooth(aes(x =bill_length_mm, y = bill_depth_mm, color = species), method = "lm")
 ```
+
+Whether the average length for a penguin exceeds 45mm?
+
+```{r}
+penguins %>%
+  summarize (avg_bill_length = mean(bill_length_mm))
+```
+
+```{r}
+  t.test (penguins$bill_length_mm, alternative = "greater", mu = 45, corf.level = 0.95)
+```
+
+Notes:
+
+## Revisiting Intro Stats
+
+We assumed the Central Limit Theorem. The sampling distribution tends toward a normal distribution as sample sizes get larger.
+
+## Simulation-based Methods
+
+-   Assumption: our data is randomly sampled and is representative of our population.
+
+-   Bootstrapping; Treating our sample as if it were the population.
