@@ -1,0 +1,96 @@
+---
+title: "Bird Baths by Saran O."
+format: html
+editor: visual
+---
+
+# Bird Bath Analysis
+
+Below, can be found a loaded tydiverse. Loading the tydiverse will collect all the data needed in this analysis
+
+```{r}
+library(tidyverse)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+# Abstract
+
+This document will focus on bird baths data set.
+
+In a study called "The Bathing Birds Study" started in 2014 titled, they collected data of bird occurrence at bird baths. This bird baths are popular sight in Australian garden. The goal of the scientists and this study is to understand the role of this bird baths in the life of the birds
+
+## Introduction:
+
+The research on birdbath was done by collecting data online from 2,500 citizen scientists on bathing bird all over Australia. From the data collected, we can hypothesize that the better bioregions are the more bird_count there is
+
+## Question to ask about the data.
+
+-   What is the bird_count per survey_year
+
+-   What is the survey_year in the urban_rural
+
+-   What is the most prominent region where that had most bird_count
+
+```{r}
+bird_baths <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-31/bird_baths.csv')
+
+
+
+```
+
+Before answering the question asked about data, we will load some datas that can be used later on while answering the questions above.
+
+### Birth_baths data summary:
+
+In the data below the code summarize(bird_baths) would be used to load a summary of the data which include bioregions, survey_year, urban_rural, bird_type and bird_count.
+
+```{r}
+bird_baths %>%
+  summarise(bird_baths)
+ 
+```
+
+### Bird_type data summary
+
+In order to find the bird types in this data, we loaded the code count(bird_type) which gave a count of different type of birds that were found in the bird_baths=sum(bird_count)).
+
+```{r}
+bird_baths %>%
+  count(bird_type)
+```
+
+## Answers to questions
+
+Below we will answer the question asked about through the use of different code. The first code we will use will give us a count values of the survey year, the cote used is count(survey_year), then we will populate the data for bird_count per survey year by using the code group_by%\>%, then summarise(total_bird_count=sum_bird_count). Lastly, we populated a data demonstrating the data between survey year and urban rural.
+
+1- Summary of survey_year
+
+```{r}
+bird_baths %>%
+  count(survey_year)
+
+```
+
+### 
+
+### The bird_count per survey_year
+
+```{r}
+bird_baths %>%
+  group_by(survey_year) %>%
+  summarise(total_bird_count= sum(bird_count))
+```
+
+```{r}
+bird_baths %>%
+  group_by(survey_year) %>%
+  summarise(total_urban_rural = sum(survey_year))
+```
