@@ -10,6 +10,8 @@ Below, can be found a loaded tydiverse. Loading the tydiverse will collect all t
 
 ```{r}
 library(tidyverse)
+#install.packages("skimr")
+library(skimr)
 ```
 
 You can add options to executable code like this
@@ -93,4 +95,27 @@ bird_baths %>%
 bird_baths %>%
   group_by(survey_year) %>%
   summarise(total_urban_rural = sum(survey_year))
+```
+
+```{r}
+bird_baths %>%
+  skim()
+```
+
+```{r}
+bird_baths %>%
+  group_by(bioregions) %>%
+  summarise(total_bird_count= sum(bird_count))
+```
+
+```{r}
+bird_baths %>%
+  group_by(bioregions) %>%
+  summarise(total_bird_count= sum(bird_count)) %>%
+  filter(!is.na(bioregions)) %>%
+  ggplot() +
+  geom_bar(aes(x= fct_reorder (bioregions, total_bird_count), y = total_bird_count), 
+           stat = "identity") +
+  coord_flip()
+
 ```
