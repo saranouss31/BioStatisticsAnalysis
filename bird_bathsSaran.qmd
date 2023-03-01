@@ -31,15 +31,15 @@ In a study called "The Bathing Birds Study" started in 2014 titled, they collect
 
 ## Introduction:
 
-The research on birdbath was done by collecting data online from 2,500 citizen scientists on bathing bird all over Australia. From the data collected, we can hypothesize that the better bioregions are the more bird_count there is
+The research on birdbath was done by collecting data online from 2,500 citizen scientists on bathing bird all over Australia. From the data collected, we can hypothesize that the birdbaths located in areas with latitude, and land that has diversity, water would have more birds
 
-## Question to ask about the data.
+Question to ask about the data.
 
 -   What is the bird_count per survey_year
 
 -   What is the survey_year in the urban_rural
 
--   What is the most prominent region where that had most bird_count
+-   What is the most predominent region that had most bird_count
 
 ```{r}
 bird_baths <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-31/bird_baths.csv')
@@ -91,6 +91,11 @@ bird_baths %>%
   summarise(total_bird_count= sum(bird_count))
 ```
 
+```{}
+```
+
+## Urban rural counts per survey year
+
 ```{r}
 bird_baths %>%
   group_by(survey_year) %>%
@@ -108,6 +113,8 @@ bird_baths %>%
   summarise(total_bird_count= sum(bird_count))
 ```
 
+## What is the most predominant region that had most bird count
+
 ```{r}
 bird_baths %>%
   group_by(bioregions) %>%
@@ -117,5 +124,11 @@ bird_baths %>%
   geom_bar(aes(x= fct_reorder (bioregions, total_bird_count), y = total_bird_count), 
            stat = "identity") +
   coord_flip()
-
 ```
+
+## 
+Conclusion:
+
+Birdbath are small basin made for birds, this birdbaths are use by the birds to hydrate and and to bath in. In the data above we can see that Sydney Basin has more birds than any other places. Sydney Basin is located in the eastern area of Australia, and has great mountain, close to the sea. We hypothesize that area witch latitude which as mountain, and that have land diversity, and water would have more birdbaths. This has been proven right because The closer the area is to mountain or the more latitude a place has the more birds we have such as in Sydney Basin, NSW North Coast. On the other hand, Victorian Volcanic Plain, is mainly full of grass, it is a place that gets really warm during the summer and doesn't have a lot of water sources near by like the other places, which explain which they are such a low count of birds in that area.
+
+In conclusion, we can say that birds do prefer area such as Sydney basin or area closer to the sea, that has land diversity and latitude because it is colder there specially during the summer.
